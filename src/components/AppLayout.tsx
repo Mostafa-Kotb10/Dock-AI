@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 const AppLayout = () => {
   return (
     <div>
-        <main>
+        <main className='relative overflow-hidden'>
             <Outlet />
         </main>
     </div>

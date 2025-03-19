@@ -2,11 +2,11 @@ import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <header className="max-w-6xl m-auto py-5 px-3 static">
+    <header className="max-w-6xl m-auto py-5 px-3 sticky top-0 right-0 left-0 z-10">
       <div className="grid grid-cols-3">
         <div>
-          <h2 className="font-bold text-2xl bg-gradient-to-r from-blue-900 to-blue-500 bg-clip-text text-transparent">
-            Dock
+          <h2 className="font-bold text-2xl ">
+            FastAF
           </h2>
         </div>
         <nav className="hidden md:block justify-items-center place-content-center">

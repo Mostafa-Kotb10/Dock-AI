@@ -1,20 +1,15 @@
-import Header from "@/components/Header";
-
-import Hero from "./Hero";
-import Marquee  from "./Marquee";
-import Features from "./Features";
-
-import HeroV2 from "./HeroV2";
+import HeaderV2 from "@/components/HeaderV2";
+import HeroV3 from "./HeroV3";
+import MarqueeV2 from "./MarqueeV2";
 
 const Home = () => {
   return (
     <>
-      <Header />
-      <HeroV2 />
-
-      {/* <Hero />
-      <Marquee />
-      <Features /> */}
+      <HeaderV2 />
+      {/* <HeroV2 /> */}
+      <HeroV3 />
+      <MarqueeV2 />
+      {/* <TimeLineV2 /> */}
     </>
   );
 };
