@@ -3,8 +3,8 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 
 const variants = {
-  initial:{
-    opacity: 0
+  initial: {
+    opacity: 0,
   },
   visible: {
     opacity: 1,
@@ -28,16 +28,17 @@ const HeaderV2 = () => {
 
   return (
     <motion.header
-      className="py-5 px-3 sticky top-0 right-0 left-0 z-10 bg-white shadow-md"
+      className="py-5 px-3 fixed top-0 right-0 left-0 z-20 bg-white shadow-md"
       initial="initial"
       animate={isVisible ? "visible" : "hidden"}
       variants={variants}
     >
-      <div className="grid grid-cols-2  items-center max-w-6xl m-auto">
+      <div className="grid grid-cols-3  items-center max-w-6xl m-auto">
         <div>
           <h2 className="font-bold text-2xl ">FastAF</h2>
         </div>
-        {/* <nav className="hidden md:block justify-items-center place-content-center">
+
+        <nav className="hidden md:block justify-items-center place-content-center">
           <ul className="flex items-center gap-5  text-[15px]">
             <li className="hover:text-blue-900 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               Home
@@ -55,7 +56,8 @@ const HeaderV2 = () => {
               Pricing
             </li>
           </ul>
-        </nav> */}
+        </nav>
+
         <div className="hidden md:block justify-items-end">
           <div className="space-x-2">
             <Button className="rounded-sm bg-white text-black border-2 border-cyan-700 hover:bg-cyan-800 hover:text-white transition-all duration-300">

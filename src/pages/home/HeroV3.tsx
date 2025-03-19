@@ -11,7 +11,7 @@ const HeroV3 = () => {
     <section className="relative">
       <div className="section-container ">
         <BackgroundShapes />
-        <div className=" text-center mt-20 space-y-4">
+        <div className=" text-center mt-40 space-y-4">
           <h1 className="text-5xl max-w-xl mx-auto text-cyan-700  font-bold">
             {/* Manage your Pharmacy with FastAF */}
             Pharmacy Mangment Easier Than Before.

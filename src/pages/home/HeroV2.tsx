@@ -34,7 +34,6 @@ const HeroV2 = () => {
 
         <div className=" text-center mt-20 space-y-4">
           <h1 className="text-5xl max-w-xl mx-auto text-cyan-700  font-bold">
-            {/* Manage your Pharmacy with FastAF */}
             Pharmacy Mangment Easier Than Before.
           </h1>
           <p className="text-lg text-gray-600 max-w-lg mx-auto">
