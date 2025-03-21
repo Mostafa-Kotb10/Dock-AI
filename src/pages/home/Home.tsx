@@ -1,6 +1,5 @@
 import HeaderV2 from "@/components/HeaderV2";
 import HeroV3 from "./HeroV3";
-import MarqueeV2 from "./MarqueeV2";
 import VerticalTimeline from "./TimeLineCl";
 
 
