@@ -122,7 +122,7 @@ export const timelineItems: TimelineItem[] = [
     icon: MdPointOfSale,
     src: counterSrc,
     direction: "ltr",
-    Bgcolor:"bg-cyan-700"
+    Bgcolor: "bg-cyan-700",
   },
   {
     title: "Automated Invoicing for Faster Transactions",
@@ -131,25 +131,17 @@ export const timelineItems: TimelineItem[] = [
     icon: FaFileInvoiceDollar,
     src: calculatorSrc,
     direction: "rtl",
-    Bgcolor:"bg-cyan-600"
+    Bgcolor: "bg-cyan-600",
   },
-  {
-    title: "Intelligent Inventory Management",
-    description:
-      "With real-time inventory tracking, the system alerts users about low-stock products or overstocked items, helping maintain optimal stock levels. It also notifies users of medicines nearing expiration, reducing waste and financial loss.",
-    icon: MdInventory,
-    src: storageSrc,
-    direction: "ltr",
-    Bgcolor:"bg-cyan-500"
-  },
+
   {
     title: "Interactive Dashboard for Performance Insights",
     description:
       "A user-friendly dashboard provides comprehensive reports on daily and monthly sales and profits. This allows pharmacy owners to monitor financial performance effortlessly and make informed business decisions.",
     icon: FaChartLine,
     src: tablet1Src,
-    direction: "rtl",
-    Bgcolor:"bg-cyan-400"
+    direction: "ltr",
+    Bgcolor: "bg-cyan-400",
   },
   {
     title: "Low-Stock Alerts and Supplier Integration",
@@ -157,8 +149,17 @@ export const timelineItems: TimelineItem[] = [
       "The system identifies products that need restocking and enables direct order placement from suppliers. This feature helps maintain product availability and prevents stock shortages.",
     src: storageShelfSrc,
     icon: MdWarning,
+    direction: "rtl",
+    Bgcolor: "bg-cyan-300",
+  },
+  {
+    title: "Secure Employee Management and Access Control",
+    description:
+      "Pharmacy owners can create employee accounts with customized access permissions, ensuring data security and efficient workflow management while preventing unauthorized access.",
+    icon: MdSecurity,
+    src: handWithTabletSrc,
     direction: "ltr",
-    Bgcolor:"bg-cyan-300"
+    Bgcolor: "bg-cyan-200",
   },
   {
     title: "Secure Employee Management and Access Control",
@@ -167,6 +168,6 @@ export const timelineItems: TimelineItem[] = [
     icon: MdSecurity,
     src: handWithTabletSrc,
     direction: "rtl",
-    Bgcolor:"bg-cyan-200"
+    Bgcolor: "bg-cyan-200",
   },
 ];

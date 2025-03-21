@@ -51,6 +51,9 @@ const TimeLineBlock = ({ progress, item }: TimeLineBlockProps) => {
       className="grid grid-cols-[1fr_auto_1fr]"
       variants={variants}
       animate={isVisible ? "visible" : "hidden"}
+      transition={{
+        duration: .1
+      }}
     >
       <div
         className={cn(
@@ -76,7 +79,7 @@ const TimeLineBlock = ({ progress, item }: TimeLineBlockProps) => {
           dir ? "order-2" : "order-0"
         )}
       >
-        <img src={item.src} className="size-[300px] rounded-sm" alt="" />
+        <img loading="lazy" src={item.src} className="size-[300px]" alt="" />
       </div>
     </motion.div>
   );

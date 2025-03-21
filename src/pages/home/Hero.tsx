@@ -1,58 +1,36 @@
+import { FaAngleRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { motion } from "motion/react";
 
-import { MoveRight, ChevronRight } from "lucide-react";
-import Ball from "@/components/Ball";
+import { BackgroundShapes } from "./design/design";
+
+// from-blue-950 from-40% to-blue-600
+// bg-gradient-to-r from-30% from-cyan-700 to-emerald-600
 
 const Hero = () => {
   return (
-    <section>
-      <div className="section-container py-0 ">
-        <motion.div className="px-10 py-1.5 border-2 border-none rounded-s w-fit mx-auto relative bg-white mt-24 shadow-md rounded-sm flex items-center gap-1">
-          <motion.div
-            className="bg-gradient-to-r from-blue-900 to-blue-500 blur-sm absolute -inset-2 -z-10"
-            initial={{
-              rotateZ: 0.6,
-            }}
-            animate={{
-              // rotateX: 40,
-              rotateZ: -0.6,
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-              duration: 1.5,
-            }}
-          />
-          <ChevronRight className="size-4" />
-          <span className="relative">dock version 1.9.0 is out.</span>
-        </motion.div>
-
-        <div className="mt-20">
-          <motion.h1
-            className="text-5xl max-w-xl text-center mx-auto font-bold bg-gradient-to-r from-blue-950 from-50% to-blue-500 bg-clip-text text-transparent
-            "
-          >
-            Build robust websites with Dock AI
-          </motion.h1>
-          <motion.p className="text-gray-700 max-w-xl text-center mx-auto mt-5">
+    <section className="relative">
+      <div className="section-container ">
+        <BackgroundShapes />
+        <div className=" text-center mt-40 space-y-4">
+          <h1 className="text-5xl max-w-xl mx-auto text-cyan-700  font-bold">
+            {/* Manage your Pharmacy with FastAF */}
+            Pharmacy Mangment Easier Than Before.
+          </h1>
+          <p className="text-lg text-gray-600 max-w-lg mx-auto">
             Using Dock build high performance websites using a sit of tools to
             help to enhance your capabilities
-          </motion.p>
+          </p>
+        </div>
 
-          <motion.div className="flex items-center justify-center mt-6">
-            <div className="space-x-3">
-              <Button className="rounded-sm bg-white text-black border-2 border-blue-950 hover:bg-blue-950 hover:text-white transition-all duration-300">
-                Join Us
-              </Button>
-              <Button className="bg-blue-800 rounded-sm hover:bg-blue-900 group inline-flex items-center">
-                <span>Read The Docs</span>
-                <MoveRight className="size-3 text-white group-hover:-rotate-[30deg] transition-transform duration-100" />
-              </Button>
-            </div>
-          </motion.div>
-        <Ball />
+        <Button className="relative px-6 py-1 bg-cyan-700 rounded-sm shadow-xl w-fit mx-auto flex items-center gap-1 group hover:bg-cyan-800 mt-6">
+          <div className="absolute group-hover:-inset-1 -inset-0 blur bg-gradient-to-r from-cyan-700 to-emerald-600 -z-10 transition-all duration-150" />
+          <FaAngleRight className="size-4" />
+          <span>Try now for free</span>
+        </Button>
+
+        <div className="flex flex-col items-center space-y-3 mt-30 ">
+          <div className="size-5 rounded-full bg-cyan-700 animate-bounce" />
+          <hr className="w-10 border-1 border-black" />
         </div>
       </div>
     </section>
@@ -60,3 +38,13 @@ const Hero = () => {
 };
 
 export default Hero;
+
+{
+  /* <Button className="rounded-sm bg-white text-black border-2 border-cyan-700 hover:bg-cyan-800 hover:text-white transition-all duration-300">
+Sign Up
+</Button>
+<Button className="group inline-flex items-center  bg-cyan-700 hover:bg-cyan-800 transition-all duration-200  border-cyan-700 hover:border-cyan-800 border-2">
+<span>Read the docs </span>
+<FaLongArrowAltRight className="group-hover:-rotate-[30deg] transition-all duration-200" />
+</Button> */
+}

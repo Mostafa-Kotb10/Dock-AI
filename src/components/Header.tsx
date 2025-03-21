@@ -1,64 +1,89 @@
+import { motion, useMotionValueEvent, useScroll, Variants } from "motion/react";
 import { Button } from "./ui/button";
+import { useState } from "react";
+import { FaBars } from "react-icons/fa";
+import { cn } from "@/lib/utils";
+
+const variants: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+};
 
 const Header = () => {
+  const { scrollY } = useScroll();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest < 50) {
+    setIsScrolled(false);
+    } else {
+      setIsScrolled(true);
+    }
+  });
+
   return (
-    <header className="max-w-6xl m-auto py-5 px-3 sticky top-0 right-0 left-0 z-10">
-      <div className="grid grid-cols-3">
+    <motion.header
+      className={cn(
+        "py-5 px-5 fixed top-0 left-0 right-0 z-20 transition-all duration-300",
+        isScrolled && "bg-white shadow-md"
+      )}
+      variants={variants}
+    >
+      <div className="grid grid-cols-3 items-center max-w-6xl px-3 m-auto">
         <div>
-          <h2 className="font-bold text-2xl ">
+          <h2 className="font-bold text-2xl bg-gradient-to-r from-cyan-700 to-emerald-600 bg-clip-text text-transparent">
             FastAF
           </h2>
         </div>
-        <nav className="hidden md:block justify-items-center place-content-center">
+
+        <motion.nav
+          className={`hidden md:block justify-items-center place-content-center`}
+          variants={variants}
+          initial="hidden"
+          animate={isScrolled ? "visible" : "hidden"}
+        >
           <ul className="flex items-center gap-5  text-[15px]">
-            <li className="hover:text-blue-900 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+            <li className="hover:text-cyan-700 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               Home
             </li>
-            <li className="hover:text-blue-900 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+            <li className="hover:text-cyan-700 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               About
             </li>
-            <li className="hover:text-blue-900 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+            <li className="hover:text-cyan-700 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               Solutions
             </li>
-            <li className="hover:text-blue-900 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+            <li className="hover:text-cyan-700 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               Features
             </li>
-            <li className="hover:text-blue-900 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
+            <li className="hover:text-cyan-700 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               Pricing
             </li>
           </ul>
-        </nav>
+        </motion.nav>
+
         <div className="hidden md:block justify-items-end">
           <div className="space-x-2">
-            <Button className="rounded-sm bg-white text-black border-2 border-blue-950 hover:bg-blue-950 hover:text-white transition-all duration-300">
+            <Button className="rounded-sm bg-white text-black border-2 border-cyan-700 hover:bg-cyan-800 hover:text-white transition-all duration-300">
               Sign Up
             </Button>
-            <Button className="bg-blue-800 rounded-sm hover:bg-blue-900">
+            <Button className="bg-cyan-700 rounded-sm hover:bg-cyan-800">
               Login
             </Button>
           </div>
         </div>
 
-        <div className="md:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            className="lucide lucide-menu cursor-pointer"
-          >
-            <line x1="4" x2="20" y1="12" y2="12" />
-            <line x1="4" x2="20" y1="6" y2="6" />
-            <line x1="4" x2="20" y1="18" y2="18" />
-          </svg>
+        <div className="md:hidden place-items-end">
+          <FaBars className="cursor-pointer size-4" />
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

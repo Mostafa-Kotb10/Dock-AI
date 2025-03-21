@@ -1,46 +1,15 @@
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { Button } from "./ui/button";
-import { useState } from "react";
 
-const variants = {
-  initial: {
-    opacity: 1,
-  },
-  visible: {
-    opacity: 1,
-  },
-  hidden: {
-    opacity: 1,
-  },
-};
-
-const HeaderV2 = () => {
-  const { scrollY } = useScroll();
-  const [isVisible, setIsVisible] = useState(false);
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest < 50) {
-      setIsVisible(false);
-    } else {
-      setIsVisible(true);
-    }
-  });
-
+const Header = () => {
   return (
-    <motion.header
-      className="py-5 px-5 fixed top-0 left-0 right-0  z-20 bg-white shadow-md transition-all duration-300 "
-      initial="initial"
-      animate={isVisible ? "visible" : "hidden"}
-      variants={variants}
-    >
-      <div className="grid grid-cols-3  items-center max-w-6xl m-auto">
+    <header className="max-w-6xl m-auto py-5 px-3 sticky top-0 right-0 left-0 z-10">
+      <div className="grid grid-cols-3">
         <div>
-          <h2 className="font-bold text-2xl bg-gradient-to-r from-cyan-700 to-emerald-600 bg-clip-text text-transparent">
+          <h2 className="font-bold text-2xl ">
             FastAF
           </h2>
         </div>
-
-        <nav className={`hidden md:block justify-items-center place-content-center ${isVisible ? "opacity-0":""}`}>
+        <nav className="hidden md:block justify-items-center place-content-center">
           <ul className="flex items-center gap-5  text-[15px]">
             <li className="hover:text-blue-900 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               Home
@@ -59,19 +28,18 @@ const HeaderV2 = () => {
             </li>
           </ul>
         </nav>
-
         <div className="hidden md:block justify-items-end">
           <div className="space-x-2">
-            <Button className="rounded-sm bg-white text-black border-2 border-cyan-700 hover:bg-cyan-800 hover:text-white transition-all duration-300">
+            <Button className="rounded-sm bg-white text-black border-2 border-blue-950 hover:bg-blue-950 hover:text-white transition-all duration-300">
               Sign Up
             </Button>
-            <Button className="bg-cyan-700 rounded-sm hover:bg-cyan-800">
+            <Button className="bg-blue-800 rounded-sm hover:bg-blue-900">
               Login
             </Button>
           </div>
         </div>
 
-        <div className="md:hidden place-items-end">
+        <div className="md:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -90,8 +58,8 @@ const HeaderV2 = () => {
           </svg>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 };
 
-export default HeaderV2;
+export default Header;

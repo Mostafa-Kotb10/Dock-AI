@@ -14,4 +14,4 @@ export {
     storageSrc,
     tablet1Src,
     tablet2Src,
-}
+};

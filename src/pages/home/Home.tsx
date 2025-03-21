@@ -1,18 +1,30 @@
-import HeaderV2 from "@/components/HeaderV2";
-import HeroV3 from "./HeroV3";
-<<<<<<< HEAD
-import VerticalTimeline from "./VerticalTimeline";
+import Header from "@/components/Header";
+import Hero from "./Hero";
 
-=======
-import VerticalTimeline from "./VerticalTimeline";
->>>>>>> dca86570e57b40bcda764323bff905549d7592e6
+// import VerticalTimeline from "./VerticalTimeline";
+// import StackedFeatureCard from "./StackedFeatureCard";
+import StackedFeaturesSection from "./StackedFeaturesSection";
 
 const Home = () => {
   return (
     <>
-      <HeaderV2 />
-      <HeroV3 />
-      <VerticalTimeline />
+      {/* <Header /> */}
+      <Hero />
+      {/* <VerticalTimeline /> */}
+      {/* <StackedFeaturesSection /> */}
+      <section>
+        <div className="min-h-[100px] overflow-y-auto">
+          <div className="h-screen bg-red-300 sticky top-0">
+            <h1>Hello</h1>
+          </div>
+          <div className="h-screen bg-red-300 sticky top-0">
+            <h1>Hello</h1>
+          </div>
+          <div className="h-screen bg-red-300 sticky top-0">
+            <h1>Hello</h1>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
