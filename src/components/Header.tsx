@@ -32,7 +32,7 @@ const Header = () => {
     <motion.header
       className={cn(
         "py-5 px-5 fixed top-0 left-0 right-0 z-20 transition-all duration-300",
-        isScrolled && "bg-white shadow-md"
+        isScrolled && "backdrop-blur-lg bg-transparent shadow-md"
       )}
       variants={variants}
     >

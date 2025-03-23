@@ -171,3 +171,126 @@ export const timelineItems: TimelineItem[] = [
     Bgcolor: "bg-cyan-200",
   },
 ];
+
+export type FeatureCard = {
+  title: string;
+  description: string;
+  benefits: string[];
+  icon: React.ComponentType;
+  src: string;
+  Bgcolor: string;
+};
+
+export const featureCards: FeatureCard[] = [
+  {
+    title: "Streamline Pharmacy Operations Effortlessly",
+    description:
+      "The system features an automated invoicing function that allows users to scan products using a camera. It instantly generates an invoice with accurate pricing, making the checkout process quick and efficient.",
+    benefits: [
+      "Automated invoicing with camera scan",
+      "Instant invoice generation",
+      "Faster checkout process",
+    ],
+    icon: MdPointOfSale,
+    src: counterSrc,
+    Bgcolor: "bg-cyan-700",
+  },
+  {
+    title: "Automated Invoicing for Faster Transactions",
+    description:
+      "Reduce transaction times with a fully automated invoicing system. Simply scan products to generate invoices instantly, ensuring pricing accuracy and efficiency.",
+    benefits: [
+      "Quick product scanning",
+      "Accurate pricing",
+      "Seamless checkout experience",
+    ],
+    icon: FaFileInvoiceDollar,
+    src: calculatorSrc,
+    Bgcolor: "bg-cyan-600",
+  },
+  {
+    title: "Interactive Dashboard for Performance Insights",
+    description:
+      "A user-friendly dashboard provides comprehensive reports on daily and monthly sales and profits. This allows pharmacy owners to monitor financial performance effortlessly and make informed business decisions.",
+    benefits: [
+      "Real-time sales tracking",
+      "Monthly performance reports",
+      "Data-driven decision making",
+    ],
+    icon: FaChartLine,
+    src: tablet1Src,
+    Bgcolor: "bg-cyan-400",
+  },
+  {
+    title: "Low-Stock Alerts and Supplier Integration",
+    description:
+      "The system identifies products that need restocking and enables direct order placement from suppliers. This feature helps maintain product availability and prevents stock shortages.",
+    benefits: [
+      "Automated low-stock alerts",
+      "Seamless supplier integration",
+      "Prevent stock shortages",
+    ],
+    icon: MdWarning,
+    src: storageShelfSrc,
+    Bgcolor: "bg-cyan-300",
+  },
+  {
+    title: "Secure Employee Management and Access Control",
+    description:
+      "Pharmacy owners can create employee accounts with customized access permissions, ensuring data security and efficient workflow management while preventing unauthorized access.",
+    benefits: [
+      "Role-based access control",
+      "Improved data security",
+      "Efficient employee management",
+    ],
+    icon: MdSecurity,
+    src: handWithTabletSrc,
+    Bgcolor: "bg-cyan-200",
+  },
+];
+
+export interface Testimonial {
+  id: number,
+  name: string;
+  date: string;
+  rating: number;
+  text: string;
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "Jeannie Grant",
+    date: "June 01, 2023",
+    rating: 5,
+    text: "FastAF has transformed how we manage prescriptions. The automated refill system saves us hours every week, reducing stress for both staff and customers!",
+  },
+  {
+    id: 2,
+    name: "Derval Russell",
+    date: "November 09, 2023",
+    rating: 5,
+    text: "We've been using FastAF for over a year, and the support has been incredible. Their system ensures we stay compliant while making insurance claims seamless.",
+  },
+  {
+    id: 3,
+    name: "Sophia Adams",
+    date: "October 15, 2023",
+    rating: 5,
+    text: "FastAF’s customer support is top-notch. Whenever we need help, they respond quickly and ensure our pharmacy operations run smoothly!",
+  },
+  {
+    id: 4,
+    name: "Mark Stevenson",
+    date: "September 05, 2023",
+    rating: 4,
+    text: "A great platform for managing patient records and prescriptions. The UI is intuitive, but I'd love to see more integrations in the future.",
+  },
+  {
+    id: 5,
+    name: "Emily Carter",
+    date: "August 22, 2023",
+    rating: 5,
+    text: "FastAF has streamlined our workflow significantly. We process prescriptions faster and avoid compliance issues thanks to their automated checks.",
+  },
+];

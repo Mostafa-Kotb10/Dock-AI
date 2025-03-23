@@ -1,16 +1,28 @@
+import { featureCards } from "@/constants/constants";
 import StackedFeatureCard from "./StackedFeatureCard";
+import { useScroll } from "motion/react";
+import { useRef } from "react";
 
 const StackedFeaturesSection = () => {
-    return (
-      <section className=" bg-gray-50"> {/* Adjust height as needed */}
-        <div className="sticky top-0">
-          <StackedFeatureCard />
-          <StackedFeatureCard />
-          <StackedFeatureCard />
-        </div>
-      </section>
-    );
-  };
-  
+  const container = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <section className="min-h-screen">
+      <div ref={container}>
+        {featureCards.map((feature, index) => (
+          <StackedFeatureCard
+            progress={scrollYProgress}
+            feature={feature}
+            index={index}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default StackedFeaturesSection;

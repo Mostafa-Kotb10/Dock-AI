@@ -1,31 +1,58 @@
-const StackedFeatureCard = () => {
+import { FeatureCard, featureCards } from "@/constants/constants";
+import { cn } from "@/lib/utils";
+import { motion, MotionValue, useTransform } from "motion/react";
+import React from "react";
+
+interface StackedFeatureCardProps {
+  feature: FeatureCard;
+  index: number;
+  progress: MotionValue;
+}
+
+const StackedFeatureCard: React.FC<StackedFeatureCardProps> = ({
+  feature,
+  index,
+  progress,
+}) => {
+  const targetScale = 1 - (featureCards.length - index) * 0.05;
+  const scale = useTransform(progress, [0, 1], [1, targetScale]);
+
   return (
-    <div className="h-screen bg-red-300 flex justify-center items-center sticky top-[300px]">
-      <div className="max-w-3xl mx-auto p-8 rounded-xl shadow-lg bg-white sticky top-[300px]">
+    <div
+      className="h-screen flex justify-center items-center sticky "
+      style={{
+        top: `${index * 2}vh`,
+      }}
+    >
+      {index === 0 && (
+        <div className="inset-0 absolute -z-10">
+          <div className="absolute section-gradient top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[700px] -z-30"></div>
+        </div>
+      )}
+      <motion.div
+        className={cn(
+          `max-w-3xl mx-auto p-8 rounded-xl shadow-lg bg-white border border-black/30 h-[500px] relative`
+        )}
+        style={{
+          scale,
+        }}
+      >
         <div className="mb-4">
-          <span className="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-indigo-100 text-indigo-800">
-            Feature
+          <span className="inline-block text-xl px-3 py-1  font-semibold rounded-md bg-emerald-500 text-white">
+            0{index + 1}
           </span>
         </div>
 
         <h2 className="text-3xl font-bold mb-4 text-gray-800">
-          Powerful Feature Title
+          {feature.title}
         </h2>
 
-        <p className="text-lg text-gray-600 mb-6">
-          A compelling description of this amazing feature and how it can help
-          your users achieve their goals. This section should clearly
-          communicate the value proposition.
-        </p>
+        <p className="text-lg text-gray-600 mb-6">{feature.description}</p>
 
         <div className="flex flex-col md:flex-row gap-6 items-center">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:flex-1 flex flex-col justify-center ">
             <ul className="space-y-3">
-              {[
-                "Benefit one with specific details",
-                "Another key benefit users will love",
-                "A third impressive feature detail",
-              ].map((item, index) => (
+              {feature.benefits.map((item, index) => (
                 <li key={index} className="flex items-start">
                   <svg
                     className="h-6 w-6 text-green-500 mr-2 flex-shrink-0"
@@ -44,34 +71,17 @@ const StackedFeatureCard = () => {
                 </li>
               ))}
             </ul>
-
-            <div className="mt-8">
-              <button className="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">
-                Learn More
-              </button>
-            </div>
           </div>
 
-          <div className="w-full md:w-1/2 bg-gray-100 h-64 rounded-lg grid place-items-center">
-            <div className="text-center text-gray-400">
-              <svg
-                className="mx-auto h-12 w-12 mb-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              <p>Feature Image/Illustration</p>
-            </div>
+          <div className="md:w-1/2 flex justify-center items-center h-[230px]">
+            <img
+              src={feature.src}
+              alt={feature.title}
+              className="size-full object-cover rounded-lg"
+            />
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
