@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const variants: Variants = {
   initial: {
@@ -22,7 +23,7 @@ const Header = () => {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest < 50) {
-    setIsScrolled(false);
+      setIsScrolled(false);
     } else {
       setIsScrolled(true);
     }
@@ -70,11 +71,17 @@ const Header = () => {
 
         <div className="hidden md:block justify-items-end">
           <div className="space-x-2">
-            <Button className="rounded-sm bg-white text-black border-2 border-cyan-700 hover:bg-cyan-800 hover:text-white transition-all duration-300">
-              Sign Up
+            <Button
+              asChild
+              className="rounded-sm bg-white text-black border-2 border-cyan-700 hover:bg-cyan-800 hover:text-white transition-all duration-300"
+            >
+              <Link to="sign-portal?portal=sign-up">Sign Up</Link>
             </Button>
-            <Button className="bg-cyan-700 rounded-sm hover:bg-cyan-800">
-              Login
+            <Button
+              asChild
+              className="bg-cyan-700 rounded-sm hover:bg-cyan-800"
+            >
+              <Link to="sign-portal?portal=sign-in">Login</Link>
             </Button>
           </div>
         </div>

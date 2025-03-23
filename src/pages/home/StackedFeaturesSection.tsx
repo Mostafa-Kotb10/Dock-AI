@@ -15,6 +15,7 @@ const StackedFeaturesSection = () => {
       <div ref={container}>
         {featureCards.map((feature, index) => (
           <StackedFeatureCard
+            key={index}
             progress={scrollYProgress}
             feature={feature}
             index={index}
