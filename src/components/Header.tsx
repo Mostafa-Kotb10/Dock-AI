@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 const variants: Variants = {
   initial: {
@@ -37,12 +38,14 @@ const Header = () => {
       )}
       variants={variants}
     >
-      <div className="grid grid-cols-3 items-center max-w-6xl px-3 m-auto">
-        <div>
+      <div className="grid grid-cols-2 md:grid-cols-3 items-center max-w-6xl px-3 m-auto">
+        {/* <div>
           <h2 className="font-bold text-2xl bg-gradient-to-r from-cyan-700 to-emerald-600 bg-clip-text text-transparent">
             FastAF
           </h2>
-        </div>
+        </div> */}
+
+        <Logo className="w-[90px]" />
 
         <motion.nav
           className={`hidden md:block justify-items-center place-content-center`}
@@ -50,7 +53,7 @@ const Header = () => {
           initial="hidden"
           animate={isScrolled ? "visible" : "hidden"}
         >
-          <ul className="flex items-center gap-5  text-[15px]">
+          <ul className="flex items-center gap-5 text-[15px]">
             <li className="hover:text-cyan-700 hover:-translate-y-1 transition-transform duration-200 cursor-pointer">
               Home
             </li>

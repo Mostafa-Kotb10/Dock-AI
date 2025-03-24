@@ -73,7 +73,7 @@ const StackedFeatureCard: React.FC<StackedFeatureCardProps> = ({
             </ul>
           </div>
 
-          <div className="md:w-1/2 flex justify-center items-center h-[230px]">
+          <div className="md:w-1/2  justify-center items-center h-[230px] hidden md:flex">
             <img
               src={feature.src}
               alt={feature.title}

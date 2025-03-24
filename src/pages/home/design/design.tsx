@@ -9,7 +9,7 @@ export const BackgroundShapes = () => {
       <PharmacySvg
         width={250}
         height={250}
-        className="text-emerald-500 blur-[2px] absolute left-5"
+        className="text-emerald-500 blur-[2px] absolute -z-10 left-5"
       />
       {/* <MedicineSvg
         width={250}

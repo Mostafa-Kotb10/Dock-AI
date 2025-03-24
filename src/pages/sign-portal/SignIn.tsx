@@ -1,6 +1,6 @@
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const form = useForm();

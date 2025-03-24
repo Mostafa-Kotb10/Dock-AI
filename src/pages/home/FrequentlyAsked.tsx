@@ -15,7 +15,7 @@ const FrequentlyAsked = () => {
           text="Everything you need to know about making your pharmacy faster, smarter, and stress-free with FastAF."
         />
 
-        <div className="max-w-lg m-auto mt-20 bg-green-300/80 rounded-sm  p-5">
+        <div className="max-w-lg m-auto mt-20  border-2 border-gray-100 rounded-sm  p-5">
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger>
