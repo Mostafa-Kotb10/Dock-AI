@@ -34,7 +34,7 @@ const SignPortal = () => {
   }, [portalParam]);
 
   return (
-    <div className="relative flex h-screen items-center justify-center overflow-hidden bg-gray-100">
+    <div className="relative flex h-screen items-center justify-center overflow-hidden bg-gray-100 ">
       <AnimatePresence mode="wait">
         <motion.div
           key={portal}
