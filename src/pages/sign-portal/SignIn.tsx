@@ -14,6 +14,7 @@ import { Switch } from "@/components/ui/switch";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { signInSchema, SignInValues } from "@/validation/schema";
+import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
   const form = useForm<SignInValues>({
@@ -106,7 +107,7 @@ const SignIn = () => {
           <div className="space-y-4 text-center">
             <span className="block text-center">Or</span>
             <Button className="w-full bg-gray-900 hover:bg-gray-700">
-              Sign In with Google
+            <FcGoogle/>  Sign In with Google
             </Button>
             Dont have an account?{" "}
             <Link
