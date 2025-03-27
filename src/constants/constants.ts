@@ -3,16 +3,10 @@ import {
   counterSrc,
   handWithTabletSrc,
   storageShelfSrc,
-  storageSrc,
   tablet1Src,
 } from "@/assets";
 
-import {
-  MdSecurity,
-  MdWarning,
-  MdInventory,
-  MdPointOfSale,
-} from "react-icons/md";
+import { MdSecurity, MdWarning, MdPointOfSale } from "react-icons/md";
 
 import {
   FaReact,
@@ -250,7 +244,7 @@ export const featureCards: FeatureCard[] = [
 ];
 
 export interface Testimonial {
-  id: number,
+  id: number;
   name: string;
   date: string;
   rating: number;

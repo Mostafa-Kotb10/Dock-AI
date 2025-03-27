@@ -1,4 +1,3 @@
-import SectionHeading from "@/components/SectionHeading";
 import {
   Accordion,
   AccordionContent,
@@ -9,13 +8,18 @@ import {
 const FrequentlyAsked = () => {
   return (
     <section>
-      <div className="section-container">
-        <SectionHeading
-          title="Got Questions? We’ve Got Answers!"
-          text="Everything you need to know about making your pharmacy faster, smarter, and stress-free with FastAF."
-        />
+      <div className="section-container grid grid-cols-2 gap-10">
+        <div className="flex flex-col">
+          <h2 className="text-4xl font-bold text-cyan-700">
+            Got Questions? We’ve Got Answers!
+          </h2>
+          <p className=" mt-2 max-w-md text-base text-gray-600">
+            Everything you need to know about making your pharmacy faster,
+            smarter, and stress-free with FastAF.
+          </p>
+        </div>
 
-        <div className="max-w-lg m-auto mt-20  border-2 border-gray-100 rounded-sm  p-5">
+        <div className=" rounded-sm border-2 border-gray-100 p-5 ">
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger>

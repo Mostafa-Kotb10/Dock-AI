@@ -9,20 +9,24 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
 import { Switch } from "@/components/ui/switch";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { signInSchema, SignInValues } from "@/validation/schema";
+import { FcGoogle } from "react-icons/fc";
+import useSignPortalContext from "@/hooks/useSignPortalContext";
 
 const SignIn = () => {
   const form = useForm<SignInValues>({
-    mode: "onChange",
     defaultValues: {
+      email: "",
+      password: "",
       remember: false,
     },
     resolver: zodResolver(signInSchema),
   });
+
+  const { setPortal } = useSignPortalContext();
 
   const onSubmit = (data: SignInValues) => {
     console.log(data);
@@ -59,6 +63,7 @@ const SignIn = () => {
                   type="password"
                   className="bg-gray-200"
                   placeholder="Password"
+                  autoComplete="current-password"
                   {...field}
                 />
               </FormControl>
@@ -67,12 +72,12 @@ const SignIn = () => {
           )}
         />
 
-        <div className="space-x- flex items-center justify-between">
+        <div className="flex items-center justify-between space-x-2">
           <FormField
             control={form.control}
             name="remember"
             render={({ field }) => (
-              <FormItem className="">
+              <FormItem>
                 <div className="flex items-center space-y-0.5 space-x-2">
                   <FormControl>
                     <Switch
@@ -80,13 +85,16 @@ const SignIn = () => {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <FormLabel className="text-base">Remember me </FormLabel>
+                  <FormLabel className="text-base">Remember me</FormLabel>
                 </div>
               </FormItem>
             )}
           />
           <div>
-            <Link to={""} className="cursor-pointer text-blue-500">
+            <Link
+              to="/forgot-password"
+              className="cursor-pointer text-blue-500"
+            >
               Forgot password?
             </Link>
           </div>
@@ -95,26 +103,26 @@ const SignIn = () => {
           <div className="space-y-6">
             <Button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400"
             >
               Sign In
             </Button>
 
-            <hr className="" />
+            <hr />
           </div>
 
           <div className="space-y-4 text-center">
             <span className="block text-center">Or</span>
-            <Button className="w-full bg-gray-900 hover:bg-gray-700">
-              Sign In with Google
+            <Button className="flex w-full items-center gap-2 bg-gray-900 hover:bg-gray-700">
+              <FcGoogle size={20} /> Sign In with Google
             </Button>
-            Dont have an account?{" "}
-            <Link
-              to={"/sign-portal?portal=sign-up"}
+            <span>Don't have an account? </span>
+            <span
+              onClick={() => setPortal("sign-up")}
               className="cursor-pointer text-blue-500"
             >
-              sign up now
-            </Link>
+              Sign up now
+            </span>
           </div>
         </div>
       </form>

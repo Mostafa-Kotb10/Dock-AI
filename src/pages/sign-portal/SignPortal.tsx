@@ -1,37 +1,14 @@
-import { useSearchParams } from "react-router-dom";
-import { motion, AnimatePresence, Variants } from "motion/react";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Logo from "@/components/Logo";
-
-const variants: Variants = {
-  "sign-in": {
-    left: 0,
-  },
-  "sign-up": {
-    left: "75%",
-  },
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-  },
-};
+import useSignPortalContext from "@/hooks/useSignPortalContext";
 
 const SignPortal = () => {
-  const [searchParams] = useSearchParams();
-  const portalParam = searchParams.get("portal") || "sign-in";
-
-  const [portal, setPortal] = useState(portalParam);
-
-  useEffect(() => {
-    setPortal(portalParam);
-  }, [portalParam]);
+  const { portal } = useSignPortalContext();
 
   return (
     <div className="relative flex h-screen items-center justify-center overflow-hidden bg-gray-100 ">
@@ -43,7 +20,7 @@ const SignPortal = () => {
           exit={{ left: portal === "sign-in" ? "70%" : 0 }}
           transition={{ ease: "easeInOut", duration: 0.7 }}
           className={cn(
-            "absolute flex h-full flex-col items-center rounded-lg bg-white shadow-lg",
+            "absolute flex h-full flex-col items-center rounded-lg bg-white shadow-lg gap-1",
           )}
         >
           <Logo className="mt-20 h-[170px]" />
@@ -55,6 +32,7 @@ const SignPortal = () => {
               duration: 0.2,
               ease: "easeInOut",
             }}
+            className="w-full px-14"
           >
             {portal === "sign-in" ? <SignIn /> : <SignUp />}
           </motion.div>

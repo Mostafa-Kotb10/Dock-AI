@@ -1,8 +1,9 @@
 import { Form, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import useSignPortalContext from "@/hooks/useSignPortalContext";
 
 const SignUp = () => {
   const form = useForm();
+  const { setPortal } = useSignPortalContext();
   return (
     <div className="">
       Sign In
@@ -10,12 +11,12 @@ const SignUp = () => {
         This is the sign in form
         <div>
           already have an account?{" "}
-          <Link
-            to={"/sign-portal?portal=sign-in"}
+          <button
+            onClick={() => setPortal("sign-in")}
             className="cursor-pointer text-blue-500"
           >
-            sign in
-          </Link>
+            Sign up now
+          </button>
         </div>
       </Form>
     </div>

@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="section-container py-3 flex justify-between text-sm ">
-        <div>© 2025 Company Name. All rights reserved</div>
+        <div>© 2025 FastAf. All rights reserved</div>
         <div className="flex space-x-2 divide-black divide-x">
           <div className="space-x-2 px-2">
             <Link to={"/sign-up"}>Sign up</Link>
