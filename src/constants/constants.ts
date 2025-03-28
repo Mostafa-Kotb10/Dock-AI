@@ -8,6 +8,8 @@ import {
 
 import { MdSecurity, MdWarning, MdPointOfSale } from "react-icons/md";
 
+import { FiPackage, FiUsers, FiShoppingCart, FiTrendingUp, FiAlertTriangle, FiCalendar, FiClipboard } from "react-icons/fi";
+
 import {
   FaReact,
   FaNodeJs,
@@ -288,3 +290,46 @@ export const testimonials: Testimonial[] = [
     text: "FastAF has streamlined our workflow significantly. We process prescriptions faster and avoid compliance issues thanks to their automated checks.",
   },
 ];
+
+
+
+export const sidebarLinks = [
+  {
+    name: "Inventory",
+    path: "/inventory",
+    icon: FiPackage,
+  },
+  {
+    name: "Employees",
+    path: "/employees",
+    icon: FiUsers,
+  },
+  {
+    name: "Medicine",
+    path: "/medicine",
+    icon: FiClipboard,
+  },
+  {
+    name: "Sales",
+    path: "/sales",
+    icon: FiTrendingUp,
+  },
+  {
+    name: "Reports",
+    path: "/reports",
+    icon: FiShoppingCart ,
+  },
+  {
+    name: "Shortage",
+    path: "/shortage",
+    icon: FiAlertTriangle,
+  },
+  {
+    name: "Expiry Warning",
+    path: "/expiry-warning",
+    icon: FiCalendar ,
+  },
+];
+
+export default sidebarLinks;
+
