@@ -23,7 +23,7 @@ const SignPortal = () => {
             "absolute flex h-full flex-col items-center rounded-lg bg-white shadow-lg gap-1",
           )}
         >
-          <Logo className="mt-20 h-[170px]" />
+          <Logo className="mt-20 h-[120px]" />
           <motion.div
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
@@ -32,7 +32,7 @@ const SignPortal = () => {
               duration: 0.2,
               ease: "easeInOut",
             }}
-            className="w-full px-14"
+            className="w-full px-14 overflow-x-hidden overflow-y-auto"
           >
             {portal === "sign-in" ? <SignIn /> : <SignUp />}
           </motion.div>

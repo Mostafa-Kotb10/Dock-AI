@@ -26,7 +26,7 @@ const SignIn = () => {
     resolver: zodResolver(signInSchema),
   });
 
-  const { setPortal } = useSignPortalContext();
+  const { setPortalParam } = useSignPortalContext();
 
   const onSubmit = (data: SignInValues) => {
     console.log(data);
@@ -118,7 +118,7 @@ const SignIn = () => {
             </Button>
             <span>Don't have an account? </span>
             <span
-              onClick={() => setPortal("sign-up")}
+              onClick={() => setPortalParam("sign-up")}
               className="cursor-pointer text-blue-500"
             >
               Sign up now

@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 
 interface SignPortalContextType {
   portal: "sign-in" | "sign-up";
-  setPortal: (portal: "sign-in" | "sign-up") => void;
+  setPortalParam: (portal: "sign-in" | "sign-up") => void;
 }
 
 export const signPortalContext = createContext<SignPortalContextType | null>(
@@ -21,12 +21,25 @@ export const SignPortalProvider = ({
 
   const [portal, setPortal] = useState(portalParam);
 
+  const setPortalParam = (param: string) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("portal", param);
+
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${params.toString()}`,
+    );
+    setPortal(param);
+  };
+
   useEffect(() => {
     setPortal(portalParam);
   }, [portalParam]);
+
   return (
     <signPortalContext.Provider
-      value={{ portal: portal as "sign-in" | "sign-up", setPortal }}
+      value={{ portal: portal as "sign-in" | "sign-up", setPortalParam }}
     >
       {children}
     </signPortalContext.Provider>

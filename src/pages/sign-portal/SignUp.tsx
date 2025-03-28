@@ -20,7 +20,7 @@ const SignUp = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const { setPortal } = useSignPortalContext();
+  const { setPortalParam } = useSignPortalContext();
 
   const onSubmit = (data: SignUpValues) => {
     console.log(data);
@@ -98,12 +98,12 @@ const SignUp = () => {
           </Button>
           <div className="text-center space-y-0.5">
             <span className="font-light">Already have an account?</span>
-            <button
-              onClick={() => setPortal("sign-in")}
+            <span
+              onClick={() => setPortalParam("sign-in")}
               className="cursor-pointer text-blue-500"
             >
               Login
-            </button>
+            </span>
           </div>
           <hr />
           <div className="text-center space-y-2">
