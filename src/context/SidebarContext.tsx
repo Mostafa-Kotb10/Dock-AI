@@ -6,6 +6,7 @@ interface SidebarContextType {
   toggleSidebar: () => void
   active: string;
   setActive: (active: string) => void;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 export const sidebarContext = createContext<SidebarContextType | null>(null);
@@ -16,14 +17,14 @@ export const SidebarProvider = ({
   children: React.ReactNode;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [active, setActive] = useState("Dashboard");
+  const [active, setActive] = useState("Inventory");
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen)
   }
 
   return (
-    <sidebarContext.Provider value={{ isOpen, toggleSidebar, active, setActive }}>
+    <sidebarContext.Provider value={{ isOpen, toggleSidebar, setIsOpen , active, setActive }}>
       {children}
     </sidebarContext.Provider>
   );

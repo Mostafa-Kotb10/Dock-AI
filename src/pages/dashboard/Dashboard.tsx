@@ -1,16 +1,19 @@
+import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 const Dashboard = () => {
   return (
-    <div className="flex">
+    <div className="flex relative">
       <Sidebar />
-      <ExampleContent />
+      <main className="p-4 ml-4 ">
+        <Outlet />
+      </main>
     </div>
   );
 };
 
 const ExampleContent = () => {
   return (
-    <div className="h-[200dvh] flex-1 bg-gray-100 p-4  ">
+    <div className="h-[200dvh] w-full bg-white p-4">
       <span>text</span>
     </div>
   );

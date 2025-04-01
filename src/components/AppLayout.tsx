@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 const AppLayout = () => {
   return (
     <div className="no-scrollbar">
-      <main className="">
+      <main>
         <Outlet />
       </main>
     </div>

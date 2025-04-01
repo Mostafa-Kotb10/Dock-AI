@@ -8,7 +8,15 @@ import {
 
 import { MdSecurity, MdWarning, MdPointOfSale } from "react-icons/md";
 
-import { FiPackage, FiUsers, FiShoppingCart, FiTrendingUp, FiAlertTriangle, FiCalendar, FiClipboard } from "react-icons/fi";
+import {
+  FiPackage,
+  FiUsers,
+  FiShoppingCart,
+  FiTrendingUp,
+  FiAlertTriangle,
+  FiCalendar,
+  FiClipboard,
+} from "react-icons/fi";
 
 import {
   FaReact,
@@ -291,52 +299,106 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-
-import { IconType } from "react-icons";
-
 export type SidebarLink = {
-  name: string;
+  title: string;
   path: string;
   icon: IconType;
 };
 
 export const sidebarLinks: SidebarLink[] = [
   {
-    name: "Inventory",
-    path: "/inventory",
+    title: "Inventory",
+    path: "inventory",
     icon: FiPackage,
   },
   {
-    name: "Employees",
-    path: "/employees",
+    title: "Employees",
+    path: "employees",
     icon: FiUsers,
   },
   {
-    name: "Medicine",
-    path: "/medicine",
+    title: "Medicine",
+    path: "medicine",
     icon: FiClipboard,
   },
   {
-    name: "Sales",
-    path: "/sales",
+    title: "Sales",
+    path: "sales",
     icon: FiTrendingUp,
   },
   {
-    name: "Reports",
-    path: "/reports",
+    title: "Reports",
+    path: "reports",
     icon: FiShoppingCart,
   },
   {
-    name: "Shortage",
-    path: "/shortage",
+    title: "Shortage",
+    path: "shortage",
     icon: FiAlertTriangle,
   },
   {
-    name: "Expiry Warning",
-    path: "/expiry-warning",
+    title: "Expiry Warning",
+    path: "expiry-warning",
     icon: FiCalendar,
   },
 ];
 
-export default sidebarLinks;
+export type InventoryItem = {
+  drugName: string;
+  drugForm: string;
+  quantity: number;
+  expiryDate: string;
+  cost: number;
+  price: number;
+};
 
+export const inventoryData: InventoryItem[] = [
+  {
+    drugName: "Paracetamol",
+    drugForm: "Tablet",
+    quantity: 500,
+    expiryDate: "12/12/2026",
+    cost: 10,
+    price: 15,
+  },
+  {
+    drugName: "Ibuprofen",
+    drugForm: "Capsule",
+    quantity: 300,
+    expiryDate: "06/08/2025",
+    cost: 8,
+    price: 12,
+  },
+  {
+    drugName: "Amoxicillin",
+    drugForm: "Syrup",
+    quantity: 150,
+    expiryDate: "09/04/2026",
+    cost: 20,
+    price: 30,
+  },
+  {
+    drugName: "Cetirizine",
+    drugForm: "Tablet",
+    quantity: 700,
+    expiryDate: "11/11/2027",
+    cost: 5,
+    price: 10,
+  },
+  {
+    drugName: "Metformin",
+    drugForm: "Tablet",
+    quantity: 250,
+    expiryDate: "03/07/2026",
+    cost: 12,
+    price: 18,
+  },
+  {
+    drugName: "Omeprazole",
+    drugForm: "Capsule",
+    quantity: 450,
+    expiryDate: "02/09/2025",
+    cost: 9,
+    price: 14,
+  },
+];
