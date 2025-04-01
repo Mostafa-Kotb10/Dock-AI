@@ -1,12 +1,19 @@
-import Sidebar from "./Sidebar"
-
+import Sidebar from "./Sidebar";
 const Dashboard = () => {
   return (
-    <div className="flex h-screen">
-        <Sidebar />
-        <div></div>
+    <div className="flex">
+      <Sidebar />
+      <ExampleContent />
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+const ExampleContent = () => {
+  return (
+    <div className="h-[200dvh] flex-1 bg-gray-100 p-4  ">
+      <span>text</span>
+    </div>
+  );
+};
+
+export default Dashboard;

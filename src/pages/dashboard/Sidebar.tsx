@@ -1,81 +1,57 @@
-import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
+import { SidebarProvider } from "@/context/SidebarContext";
+import { useSidebarContext } from "@/hooks/useSidebarContext";
+import { ChevronLeft } from "lucide-react";
 import { motion, Variants } from "motion/react";
-import { useState } from "react";
-import Logo from "@/components/Logo";
-import { cn } from "@/lib/utils";
-import sidebarLinks from "@/constants/constants";
+import { FiSidebar } from "react-icons/fi";
 
-const variants: Variants = {
+const sidebarVariants: Variants = {
+  expanded: {
+    width: "225px",
+  },
   collapsed: {
     width: "fit-content",
-  },
-  expanded: {
-    width: 300,
   },
 };
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  return (
+    <SidebarProvider>
+      <SidebarContainer />
+    </SidebarProvider>
+  );
+};
+
+const SidebarContainer = () => {
+  const { isOpen, toggleSidebar } = useSidebarContext();
 
   return (
-    <motion.div
-      className="grid h-full grid-rows-[60px_1fr_60px] border-r px-4"
-      variants={variants}
-      initial="expanded"
-      animate={isOpen ? "expanded" : "collapsed"}
-      transition={{
-        ease: "easeInOut",
+    <motion.nav
+      className="sticky top-0 left-0 h-screen shrink-0 border-r border-slate-300 bg-white p-2 "
+      layout
+      style={{
+        width: isOpen ? "225px" : "fit-content",
       }}
     >
-      <motion.div className="border-b py-2" layout>
-        <div
-          className={cn(
-            "flex items-center justify-between",
-            !isOpen && "justify-center",
-          )}
-        >
-          {isOpen && <Logo className="h-[40px]" />}
-          {isOpen ? (
-            <GoSidebarExpand
-              className="size-7 cursor-pointer"
-              onClick={() => setIsOpen(!isOpen)}
-            />
-          ) : (
-            <GoSidebarCollapse
-              className="size-7 cursor-pointer"
-              onClick={() => setIsOpen(!isOpen)}
-            />
-          )}
-        </div>
+      <motion.div layout className="grid size-10 place-content-center bg-slate-200">
+        <FiSidebar className="size-5" />
       </motion.div>
 
-      <motion.div className="" layout>
-        <div className="py-2">
-          <ul className="space-y-2">
-            {sidebarLinks.map((link) => (
-              <li key={link.path} className="text-sm">
-                <a
-                  href={link.path}
-                  className={cn(
-                    "flex items-center gap-2 rounded-lg p-2 transition hover:bg-gray-100 dark:hover:bg-gray-800",
-                    !isOpen && "justify-center",
-                  )}
-                >
-                  <link.icon className="size-5.5" />
-                  {isOpen && (
-                    <span className="whitespace-nowrap">{link.name}</span>
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </motion.div>
+      <ToggleSidebar />
+    </motion.nav>
+  );
+};
 
-      <motion.div className="border-t" layout>
-        Footer
-      </motion.div>
-    </motion.div>
+const ToggleSidebar = () => {
+  const { isOpen, toggleSidebar } = useSidebarContext();
+
+  return (
+    <motion.button
+      className="absolute right-0 bottom-0 left-0 h-10 border-t border-slate-300 bg-white"
+      layout
+      onClick={toggleSidebar}
+    >
+      <motion.span>Toggle</motion.span>
+    </motion.button>
   );
 };
 

@@ -292,8 +292,15 @@ export const testimonials: Testimonial[] = [
 ];
 
 
+import { IconType } from "react-icons";
 
-export const sidebarLinks = [
+export type SidebarLink = {
+  name: string;
+  path: string;
+  icon: IconType;
+};
+
+export const sidebarLinks: SidebarLink[] = [
   {
     name: "Inventory",
     path: "/inventory",
@@ -317,7 +324,7 @@ export const sidebarLinks = [
   {
     name: "Reports",
     path: "/reports",
-    icon: FiShoppingCart ,
+    icon: FiShoppingCart,
   },
   {
     name: "Shortage",
@@ -327,7 +334,7 @@ export const sidebarLinks = [
   {
     name: "Expiry Warning",
     path: "/expiry-warning",
-    icon: FiCalendar ,
+    icon: FiCalendar,
   },
 ];
 
