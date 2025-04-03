@@ -17,11 +17,11 @@ const Sidebar = () => {
 };
 
 const SidebarContainer = () => {
-  const { isOpen, toggleSidebar, setIsOpen } = useSidebarContext();
+  const { isOpen, setIsOpen } = useSidebarContext();
 
   return (
     <motion.nav
-      className="sticky z-10 top-0 bottom-0 left-0 h-full shrink-0 border-r border-slate-300 bg-white p-2"
+      className="absolute z-10 top-0 bottom-0 left-0 h-screen shrink-0 border-r border-slate-300 bg-white p-2 pointer-events-auto"
       layout
       style={{
         width: isOpen ? "225px" : "fit-content",

@@ -1,8 +1,13 @@
-import React from 'react'
+import  InventoryTable  from '@/components/InventoryTable'
 
 const Inventory = () => {
   return (
-    <div className='mx-auto max-w-6xl h-[200dvh]'>Inventory</div>
+    <>
+     <h1 className='text-4xl font-bold'>Inventory</h1>
+     <div className='mt-10'>
+      <InventoryTable />
+     </div>
+    </>
   )
 }
 

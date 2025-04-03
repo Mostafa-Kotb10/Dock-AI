@@ -5,7 +5,7 @@ import SignPortal from "./pages/sign-portal/SignPortal";
 import { SignPortalProvider } from "./context/SignPortalContext";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Inventory from "./pages/dashboard/Inventory";
-
+import Sales from "./pages/dashboard/Sales";
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
           {
             path: "inventory",
             element: <Inventory />,
+          },
+          {
+            path: "sales",
+            element: <Sales />,
           },
         ],
       },
