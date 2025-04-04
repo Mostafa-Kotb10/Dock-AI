@@ -21,7 +21,7 @@ const SidebarContainer = () => {
 
   return (
     <motion.nav
-      className="absolute z-10 top-0 bottom-0 left-0 h-screen shrink-0 border-r border-slate-300 bg-white p-2 pointer-events-auto"
+      className="pointer-events-auto absolute top-0 bottom-0 left-0 z-10 h-screen shrink-0 border-r border-slate-300 bg-white p-2"
       layout
       style={{
         width: isOpen ? "225px" : "fit-content",
@@ -35,7 +35,7 @@ const SidebarContainer = () => {
           <Option key={path} title={title} path={path} Icon={Icon} />
         ))}
       </div>
-      {/* <ToggleSidebar /> */}
+      <SidebarFooter  />
     </motion.nav>
   );
 };
@@ -120,5 +120,11 @@ const TitleSection = () => {
     </div>
   );
 };
+
+const SidebarFooter = () => {
+  return (
+    <div></div>
+  )
+}
 
 export default Sidebar;

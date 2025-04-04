@@ -11,7 +11,7 @@ const SignPortal = () => {
   const { portal } = useSignPortalContext();
 
   return (
-    <div className="relative flex h-screen items-center justify-center overflow-hidden bg-gray-100 ">
+    <div className="relative flex h-screen items-center justify-center overflow-hidden bg-gray-100">
       <AnimatePresence mode="wait">
         <motion.div
           key={portal}
@@ -20,7 +20,7 @@ const SignPortal = () => {
           exit={{ left: portal === "sign-in" ? "70%" : 0 }}
           transition={{ ease: "easeInOut", duration: 0.7 }}
           className={cn(
-            "absolute flex h-full flex-col items-center rounded-lg bg-white shadow-lg gap-1",
+            "absolute flex h-full flex-col items-center gap-1 rounded-lg bg-white shadow-lg",
           )}
         >
           <Logo className="mt-20 h-[120px]" />
@@ -32,7 +32,7 @@ const SignPortal = () => {
               duration: 0.2,
               ease: "easeInOut",
             }}
-            className="w-full px-14 overflow-x-hidden overflow-y-auto"
+            className="w-full overflow-x-hidden overflow-y-auto px-14"
           >
             {portal === "sign-in" ? <SignIn /> : <SignUp />}
           </motion.div>

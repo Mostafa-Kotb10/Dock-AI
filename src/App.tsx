@@ -1,11 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import Home from "@/pages/home/Home";
-import SignPortal from "./pages/sign-portal/SignPortal";
+import SignPortal from "./pages/sign-portal/portal/SignPortal";
 import { SignPortalProvider } from "./context/SignPortalContext";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Inventory from "./pages/dashboard/Inventory";
-import Sales from "./pages/dashboard/Sales";
+import Inventory from "./pages/dashboard/inventory/Inventory";
+import Sales from "./pages/dashboard/sales/Sales";
+import SignUpPage from "./pages/sign-portal/portal/SignUpPage";
+import ConfigForm from "./pages/sign-portal/configuration/ConfigForm";
+
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -18,9 +21,19 @@ const router = createBrowserRouter([
         path: "/sign-portal",
         element: (
           <SignPortalProvider>
-            <SignPortal />
+            <SignUpPage />
           </SignPortalProvider>
         ),
+        children: [
+          {
+            path: '/sign-portal',
+            element: <SignPortal />
+          },
+          {
+            path: 'config',
+            element: <ConfigForm />
+          }
+        ]
       },
       {
         path: "/dashboard",

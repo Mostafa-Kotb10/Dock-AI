@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { signUpSchema, SignUpValues } from "@/validation/schema";
+import { signUpSchema, SignUpValues } from "@/pages/sign-portal/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
 

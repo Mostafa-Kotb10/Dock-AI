@@ -12,11 +12,13 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { signInSchema, SignInValues } from "@/validation/schema";
+import { signInSchema, SignInValues } from "@/pages/sign-portal/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
+import { useSignIn } from "@/services/api";
 
 const SignIn = () => {
+  const {mutate: signIn, data} = useSignIn();
   const form = useForm<SignInValues>({
     defaultValues: {
       email: "",
@@ -26,10 +28,13 @@ const SignIn = () => {
     resolver: zodResolver(signInSchema),
   });
 
+  console.log(data)
+
   const { setPortalParam } = useSignPortalContext();
 
   const onSubmit = (data: SignInValues) => {
     console.log(data);
+    signIn(data);
   };
 
   return (
