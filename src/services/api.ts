@@ -1,15 +1,14 @@
 import axios from "axios";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 const BASE_URL = "https://4.161.48.34:8080";
 
 const AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  withCredentials: true
 });
 
 export const SignIn = (data) => {

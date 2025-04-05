@@ -21,9 +21,8 @@ const SignIn = () => {
   const {mutate: signIn, data} = useSignIn();
   const form = useForm<SignInValues>({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
-      remember: false,
     },
     resolver: zodResolver(signInSchema),
   });
@@ -41,7 +40,7 @@ const SignIn = () => {
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
-          name="email"
+          name="username"
           control={form.control}
           render={({ field }) => (
             <FormItem>
@@ -77,7 +76,7 @@ const SignIn = () => {
           )}
         />
 
-        <div className="flex items-center justify-between space-x-2">
+        {/* <div className="flex items-center justify-between space-x-2">
           <FormField
             control={form.control}
             name="remember"
@@ -103,7 +102,7 @@ const SignIn = () => {
               Forgot password?
             </Link>
           </div>
-        </div>
+        </div> */}
         <div className="space-y-6">
           <div className="space-y-6">
             <Button
