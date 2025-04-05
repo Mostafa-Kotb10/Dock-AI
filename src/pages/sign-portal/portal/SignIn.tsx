@@ -15,10 +15,10 @@ import { Link } from "react-router-dom";
 import { signInSchema, SignInValues } from "@/pages/sign-portal/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
-import { useSignIn } from "@/services/api";
+import { useSignIn } from "@/services/auth/mutations";
 
 const SignIn = () => {
-  const {mutate: signIn, data} = useSignIn();
+  const { mutate: signIn, data } = useSignIn();
   const form = useForm<SignInValues>({
     defaultValues: {
       username: "",
@@ -27,12 +27,9 @@ const SignIn = () => {
     resolver: zodResolver(signInSchema),
   });
 
-  console.log(data)
-
   const { setPortalParam } = useSignPortalContext();
 
   const onSubmit = (data: SignInValues) => {
-    console.log(data);
     signIn(data);
   };
 
@@ -103,6 +100,7 @@ const SignIn = () => {
             </Link>
           </div>
         </div> */}
+
         <div className="space-y-6">
           <div className="space-y-6">
             <Button
@@ -117,7 +115,7 @@ const SignIn = () => {
 
           <div className="space-y-4 text-center">
             <span className="block text-center">Or</span>
-              <Button className="flex w-full items-center gap-2 bg-gray-900 hover:bg-gray-700">
+            <Button className="flex w-full items-center gap-2 bg-gray-900 hover:bg-gray-700">
               <FcGoogle size={20} /> Sign In with Google
             </Button>
             <span>Don't have an account? </span>

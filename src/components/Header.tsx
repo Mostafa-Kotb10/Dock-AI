@@ -93,7 +93,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="place-items-end md:hidden">
+        <div className="place-items-end hidden">
           <FaBars className="size-4 cursor-pointer" />
         </div>
       </div>

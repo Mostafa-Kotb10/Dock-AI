@@ -8,6 +8,7 @@ import Inventory from "./pages/dashboard/inventory/Inventory";
 import Sales from "./pages/dashboard/sales/Sales";
 import SignUpPage from "./pages/sign-portal/portal/SignUpPage";
 import ConfigForm from "./pages/sign-portal/configuration/ConfigForm";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -26,18 +27,22 @@ const router = createBrowserRouter([
         ),
         children: [
           {
-            path: '/sign-portal',
-            element: <SignPortal />
+            path: "/sign-portal",
+            element: <SignPortal />,
           },
           {
-            path: 'config',
-            element: <ConfigForm />
-          }
-        ]
+            path: "config",
+            element: <ConfigForm />,
+          },
+        ],
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: "inventory",

@@ -1,7 +1,10 @@
-
+import { useSignOut } from "@/services/auth/mutations";
 import CommandMenu from "./CommandMenu";
+import { PiSignOut } from "react-icons/pi";
 
 const DashbordBar = () => {
+  const { signOut } = useSignOut();
+
   return (
     <div className="bg-slate-100/60">
       <div className="mx-auto max-w-7xl border-b border-slate-300 px-20 py-3 md:px-18">
@@ -11,9 +14,12 @@ const DashbordBar = () => {
             {/* <Button className="group relative flex w-fit cursor-pointer items-center gap-1 rounded-sm bg-emerald-600 shadow-xl hover:bg-emerald-700">
               Sign Out
             </Button> */}
-
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-6">
+            <PiSignOut
+              className="text-muted-foreground size-5 cursor-pointer"
+              onClick={signOut}
+            />
             <div className="size-10 cursor-pointer rounded-full bg-orange-600" />
             {/* <h4 className="text-base font-semibold">John due</h4> */}
             {/* <span>Owner</span> */}
