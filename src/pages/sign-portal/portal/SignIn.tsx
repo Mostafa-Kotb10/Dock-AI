@@ -41,7 +41,7 @@ const SignIn = () => {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>User Name</FormLabel>
               <FormControl>
                 <Input
                   className="bg-gray-200"
@@ -115,7 +115,10 @@ const SignIn = () => {
 
           <div className="space-y-4 text-center">
             <span className="block text-center">Or</span>
-            <Button className="flex w-full items-center gap-2 bg-gray-900 hover:bg-gray-700">
+            <Button
+              type="button"
+              className="flex w-full items-center gap-2 bg-gray-900 hover:bg-gray-700"
+            >
               <FcGoogle size={20} /> Sign In with Google
             </Button>
             <span>Don't have an account? </span>

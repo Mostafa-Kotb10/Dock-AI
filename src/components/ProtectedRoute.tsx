@@ -2,6 +2,7 @@ import { useGetUser } from "@/services/queries";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useState, useEffect } from "react";
+import Spinner from "./Spinner";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { getItem } = useLocalStorage("tokens", null);
@@ -9,19 +10,19 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
   const [isTokenChecked, setIsTokenChecked] = useState(false);
 
-  useEffect(() => {
-    const token = getItem();
-    if (!token) {
-      navigate("/sign-portal");
-      console.log("No token found, redirecting to sign-portal");
-    } else {
-      setIsTokenChecked(true);
-    }
-  }, [getItem, navigate]);
+  // useEffect(() => {
+  //   const token = getItem();
+  //   if (!token) {
+  //     navigate("/sign-portal");
+  //     console.log("No token found, redirecting to sign-portal");
+  //   } else {
+  //     setIsTokenChecked(true);
+  //   }
+  // }, [getItem, navigate]);
 
-  if (!isTokenChecked || isPending) {
-    return <div>Loading...</div>;
-  }
+  // if (!isTokenChecked || isPending) {
+  //   return <Spinner />;
+  // }
 
   return children;
 };

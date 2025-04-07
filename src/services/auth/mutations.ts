@@ -28,7 +28,7 @@ export const useSignOut = () => {
   const navigate = useNavigate();
 
   const signOut = () => {
-    navigate("/sign-portal");
+    navigate("/");
     removeItem();
   };
 
