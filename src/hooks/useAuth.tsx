@@ -1,7 +1,7 @@
 // src/hooks/useAuth.ts
 import { createContext, useContext } from "react";
-import { User } from "@/types/user";
-import { AuthTokens } from "@/types/auth.ts";
+import { User } from "@/types/user.types";
+import { AuthTokens } from "@/types/auth.types";
 
 // Define context type
 interface AuthContextType {

@@ -1,6 +1,6 @@
-import { createContext, useLayoutEffect, useState } from "react";
+import { createContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { AxiosInstance } from "@/lib/axios";
-import { AuthTokens } from "@/types/auth";
+import { AuthTokens } from "@/types/auth.types";
 import { refreshSession } from "./auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { FullScreenSpinner } from "@/components/Spinner";
@@ -12,44 +12,52 @@ interface AuthContextType {
   error: string | null; // Optional error state
 }
 
-
-
 const AuthContextV2 = createContext<AuthContextType | null>(null);
 
 export const AuthProviderV2 = ({ children }: { children: React.ReactNode }) => {
   // Get the tokens from localStorage if they exist.
-  const { getItem, setItem } = useLocalStorage("tokens");
-  const storedTokens = getItem();
+  const { getItem, setItem, removeItem } = useLocalStorage("tokens");
+  const storedTokens = useMemo(() => getItem(), []);
 
   // Initialize state with the value from localStorage (or null if none)
   const [tokens, setTokens] = useState<AuthTokens | null>(storedTokens);
   const [isLoading, setIsLoading] = useState<boolean>(false); // Loading state for token refresh
   const [error, setError] = useState<string | null>(null); // Error state for refresh failures
 
-  useLayoutEffect(() => {
-    const storedTokens = getItem();
+  // useLayoutEffect(() => {
+  //   const storedTokens = getItem();
 
-    const initialize = async () => {
-      if (storedTokens && storedTokens.refreshToken) {
-        try {
-          setIsLoading(true);
-          const response = await refreshSession(storedTokens.refreshToken);
-          setTokens(response.data);
-          setItem(response.data);
-        } catch (err) {
-          console.error("Failed to refresh session during init:", err);
-          setTokens(null);
-          setError("Session expired");
-        } finally {
-          setIsLoading(false);
-        }
-      }
-    };
+  //   const initialize = async () => {
+  //     if (storedTokens && storedTokens.refreshToken) {
+  //       try {
+  //         setIsLoading(true);
+  //         const response = await refreshSession(storedTokens.refreshToken);
+  //         setTokens(response.data);
+  //         setItem(response.data);
+  //       } catch (err) {
+  //         console.error("Failed to refresh session during init:", err);
+  //         setTokens(null);
+  //         setError("Session expired");
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     }
+  //   };
 
-    initialize();
-  }, []);
+  //   initialize();
+  // }, []);
 
   // Add the Auth header to the upcoming requests.
+
+  const syncTokens = (newTokens: AuthTokens | null) => {
+    if (newTokens) {
+      setItem(newTokens);
+    } else {
+      removeItem();
+    }
+    setTokens(newTokens);
+  };
+
   useLayoutEffect(() => {
     const authInterceptor = AxiosInstance.interceptors.request.use((config) => {
       config.withCredentials = true;
@@ -71,9 +79,9 @@ export const AuthProviderV2 = ({ children }: { children: React.ReactNode }) => {
         const originalRequest = error.config;
 
         if (
-          error?.response?.status === 403 &&
+          error?.response?.status === 401 &&
           error?.response?.data?.message === "Unauthorized"
-        ) { 
+        ) {
           try {
             setIsLoading(true); // Start loading state
 
@@ -86,7 +94,7 @@ export const AuthProviderV2 = ({ children }: { children: React.ReactNode }) => {
             return AxiosInstance(originalRequest);
           } catch (error) {
             setError("Failed to refresh session"); // Set error state
-            console.log(error)
+            console.log(error);
             setTokens(null); // Clear tokens on failure
             setIsLoading(false); // End loading state
           }

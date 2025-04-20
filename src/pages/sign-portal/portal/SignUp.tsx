@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { signUpSchema, SignUpValues } from "@/pages/sign-portal/schema";
+import { signUpSchema, SignUpValues } from "@/validation/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
 import { useSignUp} from "@/services/auth/mutations";
@@ -27,8 +27,6 @@ const SignUp = () => {
   const { setPortalParam } = useSignPortalContext();
 
   const onSubmit = (data: SignUpValues) => {
-  
-    
   signUp(data);
   };
 
@@ -40,7 +38,7 @@ const SignUp = () => {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>username</FormLabel>
               <FormControl>
                 <Input className="bg-gray-200" placeholder="Name" {...field} />
               </FormControl>

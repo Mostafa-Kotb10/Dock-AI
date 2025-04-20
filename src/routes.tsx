@@ -57,6 +57,10 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "config",
+        element: <ConfigForm />,
+      },
     ],
   },
 ]);

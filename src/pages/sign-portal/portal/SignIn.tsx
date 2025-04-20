@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { signInSchema, SignInValues } from "@/pages/sign-portal/schema";
+import { signInSchema, SignInValues } from "@/validation/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
 import { useSignInV2 } from "@/services/auth/mutations";
@@ -18,7 +18,7 @@ import { useSignInV2 } from "@/services/auth/mutations";
 import { LoaderCircle } from "lucide-react";
 
 const SignIn = () => {
-  const { mutate: signIn, isPending } = useSignInV2();
+  const {signIn, isPending } = useSignInV2();
 
   const form = useForm<SignInValues>({
     defaultValues: {

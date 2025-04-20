@@ -1,11 +1,11 @@
 // src/auth/AuthProvider.tsx
 import { useEffect, useState, PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "@/types/user";
+import { User } from "@/types/user.types";
 import { getUser, refreshSession } from "@/services/auth/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { AuthContext } from "@/hooks/useAuth"; // Import context
-import { AuthTokens } from "@/types/auth";
+import { AuthTokens } from "@/types/auth.types";
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>(null);

@@ -4,7 +4,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useEffect } from "react";
 export const useGetUser = () => {
   const queryClient = useQueryClient();
-  const { getItem } = useLocalStorage("tokens", {});
+  const { getItem } = useLocalStorage("tokens");
 
   const {
     data: user,

@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import DashbordBar from "./header/DashbordBar";
 
 import { Button } from "@/components/ui/button";
-import { useGetMe } from "@/services/queries";
+import { useGetMe } from "@/services/user/queries";
 import { useRefreshToken } from "@/services/auth/mutations";
 
 const Dashboard = () => {
