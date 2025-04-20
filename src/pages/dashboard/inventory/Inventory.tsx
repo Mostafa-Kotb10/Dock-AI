@@ -1,15 +1,13 @@
-import InventoryTable from "@/components/InventoryTable";
 import { DataTable } from "./data-table";
-import { columns } from "./columns";
-import { inventoryData } from "@/constants/constants";
+import { testColumns } from "./columns";
+import { inventoryDataTest } from "@/constants/constants";
 
 const Inventory = () => {
   return (
     <>
-      <h1 className="text-4xl font-bold">Inventory</h1>
+      <h1 className="mt-10 text-4xl font-bold">Inventory</h1>
       <div className="mt-10">
-        {/* <InventoryTable /> */}
-        <DataTable columns={columns} data={inventoryData} />
+        <DataTable columns={testColumns} data={inventoryDataTest} />
       </div>
     </>
   );

@@ -19,9 +19,28 @@ import {
   SortingState,
   Table as TableType,
   useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table";
+
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
+import { BsFunnel } from "react-icons/bs";
+
+import {
+  DropdownMenuItem,
+  DropdownMenuRadioItem,
+} from "@radix-ui/react-dropdown-menu";
 
 interface DataTablePorps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,11 +53,14 @@ export function DataTable<TData, TValue>({
 }: DataTablePorps<TData, TValue>) {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 7,
+    pageSize: 10,
   });
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColoumnVisibility] = useState<VisibilityState>(
+    {},
+  );
   // The types are drived from the react-table.
 
   const table = useReactTable({
@@ -48,23 +70,26 @@ export function DataTable<TData, TValue>({
       pagination,
       sorting,
       columnFilters,
+      columnVisibility,
     },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColoumnVisibility,
   });
 
   return (
     <div>
       <TableOptions table={table} />
 
-      <div className="rounded-md border p-2">
-        <Table>
-          <TableHeader>
+      <div className="rounded-md border bg-white p-2">
+        <Table className="text-black/90">
+          <TableHeader className="bg-slate-200">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -132,16 +157,97 @@ type TableOptionsProps<TData> = {
 };
 
 function TableOptions<TData>({ table }: TableOptionsProps<TData>) {
+  const setStatusFilter = (value: string | undefined) => {
+    table.getColumn("status")?.setFilterValue(value);
+  };
+
   return (
-    <div className="flex items-center py-4">
-      {" "}
+    <div className="grid grid-cols-4 py-4">
       <Input
         placeholder="Filter By Name..."
         value={(table.getColumn("drugName")?.getFilterValue() as string) || ""}
         onChange={(e) =>
           table.getColumn("drugName")?.setFilterValue(e.target.value)
         }
+        className="col-span-2 bg-white"
       />
+
+      <div className="col-start-4 flex justify-end gap-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="inline-flex items-center justify-center rounded-sm border-2 border-black bg-white py-2 text-black hover:bg-white">
+              <span>Column</span>
+              <ChevronDown className="size-4" />
+            </Button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Columns</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {table
+              .getAllColumns()
+              .filter(
+                (column) =>
+                  column.getCanHide() &&
+                  !["actions", "status"].includes(column.id),
+              )
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {column.columnDef.meta?.toggleLabel ??
+                    column.columnDef.header?.toString()}
+                </DropdownMenuCheckboxItem>
+              ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="inline-flex items-center justify-center rounded-sm border-2 border-black bg-white py-2 text-black hover:bg-white">
+              <span>Filters</span>
+              <BsFunnel className="size-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Filter</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuRadioGroup >
+              <DropdownMenuRadioItem
+                value="available"
+                onSelect={(e) => setStatusFilter(e.target.value)}
+              >
+                avilable
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="shortage"
+                onClick={() => setStatusFilter(status)}
+              >
+                shortage
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="unavailable-shortage"
+                onClick={() => setStatusFilter(status)}
+              >
+                unavailable-shortage
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem
+                value="unavailable"
+                onClick={() => setStatusFilter(status)}
+              >
+                unavailable
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => setStatusFilter(undefined)}>
+              Clear
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 }

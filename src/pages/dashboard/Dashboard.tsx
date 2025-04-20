@@ -2,18 +2,27 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import DashbordBar from "./header/DashbordBar";
 
+import { Button } from "@/components/ui/button";
+import { useGetMe } from "@/services/queries";
+import { useRefreshToken } from "@/services/auth/mutations";
+
 const Dashboard = () => {
+  const { refresh } = useRefreshToken();
+
   return (
-    <div className="relative bg-slate-50">
+    <div className="relative bg-emerald-50/15">
       <div className="pointer-events-none fixed top-0 left-0 z-10 h-screen w-64">
         <Sidebar />
       </div>
       <DashbordBar />
-      <main className="mx-auto mt-10 min-h-screen max-w-7xl px-20 pt-3 md:px-18">
+      <main className="mx-auto min-h-screen max-w-7xl px-20 pt-3 md:px-18">
+        <Button onClick={() => refresh()}>refresh</Button>
         <Outlet />
       </main>
     </div>
   );
 };
+
+// bg-emerald-50/15
 
 export default Dashboard;

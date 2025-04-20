@@ -41,13 +41,3 @@ export const StackedCardsShapes = () => {
     </>
   );
 };
-
-/*
-
-      <PharmacySvg
-        width={100}
-        height={100}
-        className="text-emerald-700 absolute top-0 right-30 -z-0"
-      />
-
-*/

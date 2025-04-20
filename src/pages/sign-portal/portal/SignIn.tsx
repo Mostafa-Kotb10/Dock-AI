@@ -9,16 +9,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { signInSchema, SignInValues } from "@/pages/sign-portal/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
-import { useSignIn } from "@/services/auth/mutations";
+import { useSignIn, useSignInV2 } from "@/services/auth/mutations";
+import Spinner from "@/components/Spinner";
+import { LoaderCircle } from "lucide-react";
 
 const SignIn = () => {
-  const { mutate: signIn, data } = useSignIn();
+  const { mutate: signIn, isPending } = useSignInV2();
+
   const form = useForm<SignInValues>({
     defaultValues: {
       username: "",
@@ -30,6 +31,7 @@ const SignIn = () => {
   const { setPortalParam } = useSignPortalContext();
 
   const onSubmit = (data: SignInValues) => {
+    console.log(data);
     signIn(data);
   };
 
@@ -105,9 +107,14 @@ const SignIn = () => {
           <div className="space-y-6">
             <Button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-800"
+              disabled={isPending}
             >
-              Sign In
+              {isPending ? (
+                <LoaderCircle className="size-4 animate-spin" />
+              ) : (
+                <span>Sign In</span>
+              )}
             </Button>
 
             <hr />

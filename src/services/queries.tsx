@@ -13,7 +13,6 @@ export const useGetUser = () => {
   } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
-    enabled: !!localStorage.getItem("tokens"),
     retry: 3,
   });
 
@@ -22,6 +21,20 @@ export const useGetUser = () => {
       queryClient.cancelQueries({ queryKey: ["user"] });
     }
   }, [getItem, queryClient]);
+
+  return { user, isError, isPending };
+};
+
+export const useGetMe = () => {
+  const {
+    data: user,
+    isError,
+    isPending,
+  } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUser,
+    retry: 3,
+  });
 
   return { user, isError, isPending };
 };

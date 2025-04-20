@@ -8,7 +8,7 @@ import Inventory from "./pages/dashboard/inventory/Inventory";
 import Sales from "./pages/dashboard/sales/Sales";
 import SignUpPage from "./pages/sign-portal/portal/SignUpPage";
 import ConfigForm from "./pages/sign-portal/configuration/ConfigForm";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./services/auth/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +43,9 @@ export const router = createBrowserRouter([
             <Dashboard />
           </ProtectedRoute>
         ),
+        loader: async () => {
+          return null;
+        },
         children: [
           {
             path: "inventory",

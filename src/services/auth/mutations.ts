@@ -2,29 +2,37 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
-import { signIn } from "./auth-api";
+import { refreshSession, signIn } from "./auth";
+import { SignInValues } from "@/pages/sign-portal/schema";
+import useAuthV2 from "@/hooks/useAuthV2";
 
 export const useSignIn = () => {
-  const { setItem } = useLocalStorage("tokens", {});
   const navigate = useNavigate();
+  const { setItem } = useLocalStorage("tokens");
+  const { setTokens } = useAuthV2();
 
-  const { mutate, data: tokens } = useMutation({
-    mutationFn: signIn,
-    onSuccess(tokens) {
-      setItem(tokens?.data);
-      console.log("sign in: success");
+  const mutation = useMutation({
+    mutationFn: (data: SignInValues) => signIn(data),
+    onSuccess: async (response) => {
+      const tokens = response.data;
+      setTokens(tokens);
+      setItem(tokens);
       navigate("/dashboard");
     },
     onError: () => {
-      console.log("Error");
+      console.error("Sign-in failed.");
     },
   });
 
-  return { mutate, data: tokens };
+  return {
+    ...mutation,
+    signIn: mutation.mutate,
+    tokens: mutation.data?.data,
+  };
 };
 
 export const useSignOut = () => {
-  const { removeItem } = useLocalStorage("tokens", {});
+  const { removeItem } = useLocalStorage("tokens");
   const navigate = useNavigate();
 
   const signOut = () => {
@@ -33,4 +41,66 @@ export const useSignOut = () => {
   };
 
   return { signOut };
+};
+
+export const useSignInV2 = () => {
+  const { setTokens } = useAuthV2();
+  const { setItem } = useLocalStorage("tokens");
+
+  const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: (data: SignInValues) => signIn(data),
+    onSuccess: (data) => {
+      console.log("Login Success");
+      setTokens(data);
+      setItem(data);
+      navigate("/dashboard");
+    },
+    onError: () => {
+      console.error("Sign-in failed.");
+    },
+  });
+
+  return {
+    ...mutation,
+    signIn: mutation.mutate,
+    tokens: mutation.data?.data,
+  };
+};
+
+export const useRefreshToken = () => {
+  const { tokens, setTokens } = useAuthV2();
+  const { setItem } = useLocalStorage("tokens");
+
+  const {
+    mutate: refresh,
+    isPending: isRefreshing,
+    error,
+  } = useMutation({
+    mutationFn: () => {
+      if (!tokens?.refreshToken) {
+        return Promise.reject(new Error("No refresh token available"));
+      }
+
+      return refreshSession(tokens.refreshToken);
+    },
+    onSuccess: (response) => {
+      console.log("new-tokens: ",response.data);
+      setTokens(response.data);
+      setItem(response.data);
+      return response.data;
+    },
+    onError: () => {
+      console.log("Error occurred while refreshing the token");
+      setTokens(null);
+      setTokens(null)
+    },
+  });
+
+  return {
+    refresh,
+    isRefreshing,
+    error,
+  };
 };

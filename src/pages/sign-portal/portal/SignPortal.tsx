@@ -6,6 +6,7 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Logo from "@/components/Logo";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
+import { Link } from "react-router-dom";
 
 const SignPortal = () => {
   const { portal } = useSignPortalContext();
@@ -23,7 +24,9 @@ const SignPortal = () => {
             "absolute flex h-full flex-col items-center gap-1 rounded-lg bg-white shadow-lg",
           )}
         >
-          <Logo className="mt-20 h-[120px]" />
+          <Link to="/">
+            <Logo className="mt-20 h-[120px]" />
+          </Link>
           <motion.div
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
