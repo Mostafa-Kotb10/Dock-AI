@@ -8,7 +8,7 @@ export type SignInValues = z.infer<typeof signInSchema>;
 
 export const signUpSchema = z
   .object({
-    name: z.string().regex(/^[^0-9]+$/, "No numbers allowed"),
+    username: z.string().regex(/^[^0-9]+$/, "No numbers allowed"),
     email: z.string().email(),
     password: z.string().min(3),
     repassword: z.string().min(3)

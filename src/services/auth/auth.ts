@@ -1,6 +1,5 @@
 import { AxiosInstance, AxiosInstanceNoAuth } from "@/lib/axios";
-import { SignInValues } from "@/pages/sign-portal/schema";
-import { AuthTokens } from "@/types/auth";
+import { SignInValues, SignUpValues } from "@/pages/sign-portal/schema";
 import { User } from "@/types/user";
 
 // 🔐 Sign-in
@@ -20,3 +19,10 @@ export const refreshSession = (refreshToken: string) => {
     refreshToken,
   });
 };
+// 🔐 Sign-UP
+export const signUp = async (data: SignUpValues)=>{
+  
+  const { repassword, ...requestData } = data;
+  console.log("Singup Func",requestData );
+  return (await AxiosInstance.post("/api/v1/auth/signup",{...requestData ,phone:"88888",name:"kk"}));
+}

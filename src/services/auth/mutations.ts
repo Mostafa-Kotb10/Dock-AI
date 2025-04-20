@@ -2,8 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
-import { refreshSession, signIn } from "./auth";
-import { SignInValues } from "@/pages/sign-portal/schema";
+import { refreshSession, signIn, signUp } from "./auth";
+import { SignInValues ,SignUpValues } from "@/pages/sign-portal/schema";
+
 import useAuthV2 from "@/hooks/useAuthV2";
 
 export const useSignIn = () => {
@@ -102,5 +103,30 @@ export const useRefreshToken = () => {
     refresh,
     isRefreshing,
     error,
+  };
+};
+
+export const useSignUp = () => {
+  const { setItem } = useLocalStorage("tokens");
+  const { setTokens } = useAuthV2();
+
+  const mutation = useMutation({
+    mutationFn:  (data: SignUpValues) => 
+         signUp(data)
+    ,
+    onSuccess: (response) => {
+      const tokens = response.data;
+      setTokens(tokens.jwt);
+      setItem(tokens.jwt);
+      return response;
+    },
+    onError: (error) => {
+      console.error("Sign-up failed:", error);
+    },
+  });
+  return {
+    ...mutation,
+    signUp: mutation.mutate,
+    
   };
 };

@@ -13,8 +13,8 @@ import { useForm } from "react-hook-form";
 import { signInSchema, SignInValues } from "@/pages/sign-portal/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
-import { useSignIn, useSignInV2 } from "@/services/auth/mutations";
-import Spinner from "@/components/Spinner";
+import { useSignInV2 } from "@/services/auth/mutations";
+
 import { LoaderCircle } from "lucide-react";
 
 const SignIn = () => {
