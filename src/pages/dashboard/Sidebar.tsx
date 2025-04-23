@@ -30,12 +30,12 @@ const SidebarContainer = () => {
       onHoverEnd={() => setIsOpen(false)}
     >
       <TitleSection />
-      <div className="w-full flex flex-col gap-1">
+      <div className="flex w-full flex-col gap-1">
         {sidebarLinks.map(({ title, path, icon: Icon }) => (
           <Option key={path} title={title} path={path} Icon={Icon} />
         ))}
       </div>
-      <SidebarFooter  />
+      <SidebarFooter />
     </motion.nav>
   );
 };
@@ -55,27 +55,33 @@ const Option = ({ title, path, Icon }: OptionProps) => {
     <Link to={path}>
       <motion.button
         className={cn(
-          "relative flex h-10 w-full cursor-pointer items-center  transition-colors hover:bg-white group",
+          "group relative flex h-10 w-full cursor-pointer items-center transition-colors hover:bg-white",
         )}
         onClick={() => setActive(title)}
       >
         <motion.div
           layout
           className={cn(
-            "absolute inset-0 -z-10 h-full  text-white",
+            "absolute inset-0 -z-10 h-full text-white",
             isActive && "bg-white",
           )}
         />
         <motion.div
           layout
-          className={cn("pointer-events-none grid h-full w-10 place-content-center text-lg text-white group-hover:text-black", isActive && "text-black")}
+          className={cn(
+            "pointer-events-none grid h-full w-10 place-content-center text-lg text-white group-hover:text-black",
+            isActive && "text-black",
+          )}
         >
           <Icon className="" />
         </motion.div>
         {isOpen && (
           <motion.span
             layout
-            className={cn("text-sm text-white group-hover:text-black", isActive && "text-black")}
+            className={cn(
+              "text-sm text-white group-hover:text-black",
+              isActive && "text-black",
+            )}
             initial={{
               opacity: 0,
             }}
@@ -85,8 +91,7 @@ const Option = ({ title, path, Icon }: OptionProps) => {
             transition={{
               delay: 0.1,
             }}
-            
-          > 
+          >
             {title}
           </motion.span>
         )}
@@ -100,7 +105,7 @@ const TitleSection = () => {
 
   return (
     <motion.div layout className="mb-3 border-b border-slate-300 pb-3">
-      <div className="flex cursor-pointer items-center justify-between rounded-md transition-colors ">
+      <div className="flex cursor-pointer items-center justify-between rounded-md transition-colors">
         {isOpen && (
           <motion.div
             layout
@@ -114,7 +119,9 @@ const TitleSection = () => {
               delay: 0.1,
             }}
           >
-            <Logo className="h-10" />
+            <Link to="/">
+              <Logo className="h-10" />
+            </Link>
           </motion.div>
         )}
         <motion.div layout className="grid size-10 place-content-center">
@@ -126,9 +133,7 @@ const TitleSection = () => {
 };
 
 const SidebarFooter = () => {
-  return (
-    <div></div>
-  )
-}
+  return <div></div>;
+};
 
 export default Sidebar;

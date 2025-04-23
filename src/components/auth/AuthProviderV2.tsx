@@ -1,7 +1,7 @@
-import { createContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { createContext, useLayoutEffect, useState } from "react";
 import { AxiosInstance } from "@/lib/axios";
 import { AuthTokens } from "@/types/auth.types";
-import { refreshSession } from "./auth";
+import { refreshSession } from "../../services/auth/auth";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { FullScreenSpinner } from "@/components/Spinner";
 
@@ -10,14 +10,15 @@ interface AuthContextType {
   setTokens: (data: AuthTokens | null) => void;
   isLoading: boolean; // Loading state for token refresh
   error: string | null; // Optional error state
-}
+};
 
 const AuthContextV2 = createContext<AuthContextType | null>(null);
 
 export const AuthProviderV2 = ({ children }: { children: React.ReactNode }) => {
   // Get the tokens from localStorage if they exist.
-  const { getItem, setItem, removeItem } = useLocalStorage("tokens");
-  const storedTokens = useMemo(() => getItem(), []);
+  const { getItem, setItem, removeItem } =
+    useLocalStorage<AuthTokens>("tokens");
+  const storedTokens = getItem();
 
   // Initialize state with the value from localStorage (or null if none)
   const [tokens, setTokens] = useState<AuthTokens | null>(storedTokens);
@@ -86,9 +87,9 @@ export const AuthProviderV2 = ({ children }: { children: React.ReactNode }) => {
             setIsLoading(true); // Start loading state
 
             const response = await refreshSession(tokens?.refreshToken);
-            setTokens(response.data); // Update tokens
+            setTokens(response); // Update tokens
 
-            originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            originalRequest.headers.Authorization = `Bearer ${response.accessToken}`;
             originalRequest._retry = true;
             setIsLoading(false); // End loading state
             return AxiosInstance(originalRequest);

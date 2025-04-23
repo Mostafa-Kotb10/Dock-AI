@@ -12,7 +12,7 @@ export const signUpSchema = z
     username: z.string(),
     email: z.string().email(),
     password: z.string().min(3),
-    repassword: z.string().min(3)
+    repassword: z.string().min(3),
   })
   .refine((data) => data.password === data.repassword, {
     message: "Passwords do not match",
@@ -20,3 +20,11 @@ export const signUpSchema = z
   });
 
 export type SignUpValues = z.infer<typeof signUpSchema>;
+
+export const onboardingFormSchema = z.object({
+  pharmacy: z.object({
+    name: z.string().nonempty()
+  })
+});
+
+export type OnboardingValues = z.infer<typeof onboardingFormSchema>;

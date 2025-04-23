@@ -13,21 +13,30 @@ import { useForm } from "react-hook-form";
 import { signUpSchema, SignUpValues } from "@/validation/schema";
 import { FcGoogle } from "react-icons/fc";
 import useSignPortalContext from "@/hooks/useSignPortalContext";
-import { useSignUp} from "@/services/auth/mutations";
-import { LoaderCircle } from "lucide-react";
+import { useSignUpStore } from "@/store/signUpStore";
+import { useNavigate } from "react-router-dom";
 
- 
 const SignUp = () => {
-  const { mutate: signUp, isPending } = useSignUp();
+  const { setData } = useSignUpStore();
   const form = useForm<SignUpValues>({
     mode: "onChange",
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      repassword: "",
+      username: "",
+    },
   });
+
+  const navigate = useNavigate();
 
   const { setPortalParam } = useSignPortalContext();
 
   const onSubmit = (data: SignUpValues) => {
-  signUp(data);
+    const { repassword, ...formData } = data;
+    setData(formData);
+    navigate("/onboarding");
   };
 
   return (
@@ -100,13 +109,8 @@ const SignUp = () => {
           <Button
             type="submit"
             className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-800"
-            disabled={isPending}
           >
-            {isPending ? (
-              <LoaderCircle className="size-4 animate-spin" />
-            ) : (
-              <span>Sign Up</span>
-            )}
+            <span>Sign Up</span>
           </Button>
 
           <div className="space-y-0.5 text-center">

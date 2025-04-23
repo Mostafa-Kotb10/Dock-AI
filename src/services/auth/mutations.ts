@@ -6,6 +6,8 @@ import { refreshSession, signIn, signUp } from "./auth";
 import { SignInValues, SignUpValues } from "@/pages/sign-portal/schema";
 
 import useAuthV2 from "@/hooks/useAuthV2";
+import { OnboardingValues } from "@/validation/schema";
+import { toast } from "sonner";
 
 // export const useSignIn = () => {
 //   const navigate = useNavigate();
@@ -106,21 +108,27 @@ export const useRefreshToken = () => {
   };
 };
 
+type SignUpParam = Omit<SignUpValues, "repassword"> & OnboardingValues;
+
 export const useSignUp = () => {
-  const { setItem } = useLocalStorage("tokens");
-  const { setTokens } = useAuthV2();
-  const navigate = useNavigate();
+  // const { setItem } = useLocalStorage("tokens");
+  // const { setTokens } = useAuthV2();
+  // const navigate = useNavigate();
 
   const mutation = useMutation({
-    mutationFn: (data: SignUpValues) => signUp(data),
-    onSuccess: ({ jwt }) => {
-      console.log("sign-up response:", jwt);
-      setItem(jwt);
-      setTokens(jwt);
-      navigate("/config");
+    mutationFn: (data: SignUpParam) => {
+      console.log("Sending to /signup:", data);
+      return signUp(data);
+    },
+    onSuccess: (data) => {
+      console.log("Success", data);
+      toast.success("Account created Successully")
     },
     onError: (error) => {
       console.error("Sign-up failed:", error);
+      toast.error("An error occured", {
+        description: error.message
+      });
     },
   });
   return {

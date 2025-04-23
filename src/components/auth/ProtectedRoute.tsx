@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthV2 from "@/hooks/useAuthV2";
-import { useGetMe } from "../user/queries";
+import { useGetMe } from "@/services/user/queries";
 import { FullScreenSpinner } from "@/components/Spinner";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -9,14 +9,20 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
   const { isPending, isError } = useGetMe();
 
+  const shouldRedirect = !tokens || isError;
+
   useEffect(() => {
-    if ((!tokens || isError) && !isPending) {
+    if (!isPending && shouldRedirect) {
       navigate("/sign-portal", { replace: true });
     }
-  }, [tokens, isError, isPending, navigate]);
+  }, [shouldRedirect, isPending, navigate]);
 
   if (isPending) {
     return <FullScreenSpinner />;
+  }
+
+  if (shouldRedirect) {
+    return null; // don't flash protected content
   }
 
   return <>{children}</>;

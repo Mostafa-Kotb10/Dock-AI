@@ -1,4 +1,4 @@
-import AuthContextV2 from "@/services/auth/AuthProviderV2";
+import AuthContextV2 from "@/components/auth/AuthProviderV2";
 import { useContext } from "react";
 
 const useAuthV2 = () => {

@@ -5,6 +5,7 @@ const AppLayout = () => {
     <div className="no-scrollbar">
       <main>
         <Outlet />
+
       </main>
     </div>
   );

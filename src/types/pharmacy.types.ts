@@ -3,18 +3,18 @@ import { User } from "./user.types";
 export interface Pharmacy {
   id: number;
   name: string;
-  owner: User;
-  address: string;
-  location: {
+  owner?: User;
+  address?: string;
+  location?: {
     latitude: number;
     longitude: number;
   };
-  isBranch: boolean;
-  shifts: Shift[];
-  expiryThreshold: number;
-  mainBranch: number;
-  createdAt: string;
-  updatedAt: string;
+  isBranch?: boolean;
+  shifts?: Shift[];
+  expiryThreshold?: number;
+  mainBranch?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Shift {
